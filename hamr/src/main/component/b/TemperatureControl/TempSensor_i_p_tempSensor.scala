@@ -8,18 +8,24 @@ import b._
 // This file will not be overwritten so is safe to edit
 object TempSensor_i_p_tempSensor {
 
+  var lastTemp: Temperature_i = TempSensorNative.currentTempGet()
+
   def initialise(api: TempSensor_i_Initialization_Api): Unit = {
     // initialize outgoing data port
-    val temp = TempSensorNative.currentTempGet()
-    api.setcurrentTemp(temp)
+    lastTemp = TempSensorNative.currentTempGet()
+    api.setcurrentTemp(lastTemp)
   }
 
   def timeTriggered(api: TempSensor_i_Operational_Api): Unit = {
     val temp = TempSensorNative.currentTempGet()
-    api.setcurrentTemp(temp)
-    api.sendtempChanged()
-    val degree = Util.toFahrenheit(temp).degrees
-    api.logInfo(s"Sensed temperature: $degree F")
+    if(temp != lastTemp) {
+      lastTemp = temp
+      api.setcurrentTemp(temp)
+      api.sendtempChanged()
+
+      val degree = Util.toFahrenheit(temp).degrees
+      api.logInfo(s"Sensed temperature: $degree F")
+    }
   }
 
   def activate(api: TempSensor_i_Operational_Api): Unit = { }
@@ -31,6 +37,7 @@ object TempSensor_i_p_tempSensor {
   def recover(api: TempSensor_i_Operational_Api): Unit = { }
 }
 
+import exts._
 @ext object TempSensorNative {
   def currentTempGet(): Temperature_i = $
 }

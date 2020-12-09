@@ -7,3 +7,4 @@ instances/
 **/CAmkES_seL4/slang_libraries/
 **/CAmkES_seL4_VM/hamr/
 **/sel4-build/
+**/target

@@ -1,5 +1,6 @@
-package b.TemperatureControl
+package b.TemperatureControl.exts
 
+import b.TemperatureControl.{TempUnit, Temperature_i}
 import org.sireum._
 
 object TempSensorNative_Ext {

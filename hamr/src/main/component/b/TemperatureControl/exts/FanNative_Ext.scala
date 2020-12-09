@@ -1,4 +1,6 @@
-package b.TemperatureControl
+package b.TemperatureControl.exts
+
+import b.TemperatureControl._
 
 object FanNative_Ext {
   val errorRate = 35

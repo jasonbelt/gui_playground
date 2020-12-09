@@ -31,6 +31,7 @@ object Fan_i_p_fan {
   def recover(api: Fan_i_Operational_Api): Unit = { }
 }
 
+import exts._
 @ext object FanNative {
   def fanCmdActuate(cmd: FanCmd.Type): FanAck.Type = $
 }
